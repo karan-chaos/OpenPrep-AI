@@ -272,6 +272,8 @@ app.get('/api/user/quota', protect, require('./controllers/userController').getQ
 app.use('/api/ai', aiRoutes);
 app.use('/api/ai-editor', aiEditorRoutes);
 app.use('/api/quiz-battles', quizBattleRoutes);
+const weaknessAdaptiveQuizRoutes = require('./routes/weaknessAdaptiveQuizRoutes');
+app.use('/api/weakness-adaptive', weaknessAdaptiveQuizRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/readiness', readinessRoutes);
 app.use('/api/analytics', analyticsRoutes);
