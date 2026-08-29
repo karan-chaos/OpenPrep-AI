@@ -90,6 +90,8 @@ const WeeklyStudyReport = require('./WeeklyStudyReport');
 const StudyMilestone = require('./StudyMilestone');
 const UserMilestone = require('./UserMilestone');
 const { ModeratorAuditLog, initModeratorAuditLog } = require('./ModeratorAuditLog');
+const StudyPlaylist = require('./StudyPlaylist');
+const StudyPlaylistItem = require('./StudyPlaylistItem');
 
 initBounty(sequelize);
 initBountySolution(sequelize);
@@ -416,9 +418,29 @@ User.hasMany(ExamStrategy, { foreignKey: 'user', onDelete: 'CASCADE' });
 ExamStrategy.belongsTo(User, { foreignKey: 'user', as: 'userRef' });
 Exam.hasMany(ExamStrategy, { foreignKey: 'exam', onDelete: 'CASCADE' });ExamStrategy.belongsTo(Exam, { foreignKey: 'exam', as: 'examRef' });
 
+// StudyPlaylist associations
+User.hasMany(StudyPlaylist, { foreignKey: 'user', onDelete: 'CASCADE' });
+StudyPlaylist.belongsTo(User, { foreignKey: 'user', as: 'userRef' });
+Subject.hasMany(StudyPlaylist, { foreignKey: 'subject', onDelete: 'SET NULL' });
+StudyPlaylist.belongsTo(Subject, { foreignKey: 'subject', as: 'subjectRef' });
+StudyPlaylist.hasMany(StudyPlaylistItem, { foreignKey: 'playlistId', as: 'items', onDelete: 'CASCADE' });
+StudyPlaylistItem.belongsTo(StudyPlaylist, { foreignKey: 'playlistId', as: 'playlistRef' });
+User.hasMany(StudyPlaylistItem, { foreignKey: 'user', onDelete: 'CASCADE' });
+StudyPlaylistItem.belongsTo(User, { foreignKey: 'user', as: 'userRef' });
+
 // StudyTip associations
 User.hasMany(StudyTip, { foreignKey: 'user', onDelete: 'CASCADE' });
 StudyTip.belongsTo(User, { foreignKey: 'user', as: 'userRef' });
+
+// StudyPlaylist associations
+User.hasMany(StudyPlaylist, { foreignKey: 'user', onDelete: 'CASCADE' });
+StudyPlaylist.belongsTo(User, { foreignKey: 'user', as: 'userRef' });
+Subject.hasMany(StudyPlaylist, { foreignKey: 'subject', onDelete: 'SET NULL' });
+StudyPlaylist.belongsTo(Subject, { foreignKey: 'subject', as: 'subjectRef' });
+StudyPlaylist.hasMany(StudyPlaylistItem, { foreignKey: 'playlistId', as: 'items', onDelete: 'CASCADE' });
+StudyPlaylistItem.belongsTo(StudyPlaylist, { foreignKey: 'playlistId', as: 'playlistRef' });
+User.hasMany(StudyPlaylistItem, { foreignKey: 'user', onDelete: 'CASCADE' });
+StudyPlaylistItem.belongsTo(User, { foreignKey: 'user', as: 'userRef' });
 
 // DeckRating associations
 DeckRating.belongsTo(User, { foreignKey: 'userId', as: 'userRef' });
@@ -521,4 +543,6 @@ module.exports = {
   ResumeParseSession,
   MockInterview,
   SalaryNegotiation,
+  StudyPlaylist,
+  StudyPlaylistItem,
 };

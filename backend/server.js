@@ -451,6 +451,8 @@ app.use('/api/learning-path', require('./routes/learningPathRoutes'));
 app.use('/user/learning-path', require('./routes/learningPathRoutes'));
 const studyGoalRoutes = require('./routes/studyGoalRoutes');
 app.use('/api/study-goals', studyGoalRoutes);
+const studyPlaylistRoutes = require('./routes/studyPlaylistRoutes');
+app.use('/api/study-playlists', studyPlaylistRoutes);
 const studyAnalyticsRoutes = require('./routes/studyAnalyticsRoutes');
 app.use('/api/study-analytics', studyAnalyticsRoutes);
 const flashcardMasteryRoutes = require('./routes/flashcardMasteryRoutes');
